@@ -1,5 +1,5 @@
 ---
-title: "Message Received"
+
 ---
 
 Message received!
