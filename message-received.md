@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Message received"
-permalink: /message-received/
+permalink: /test/message-received/
 ---
 
 Message received!
