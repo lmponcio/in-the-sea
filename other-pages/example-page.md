@@ -1,6 +1,6 @@
 ---
 layout: "page"
-permalink: /origin
+permalink: /origin/
 ---
 This is an example
 
