@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Message received
+title: "Message received"
 permalink: /message-received/
 ---
 
