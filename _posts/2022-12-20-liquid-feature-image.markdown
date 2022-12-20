@@ -8,7 +8,7 @@ tags: liquid
 
 I found a [video online](https://www.youtube.com/watch?v=6oKO-7gsM4s&list=LL&index=1) explaining how to add featured images to Jekyll posts using liquid. I followed the instructions but I needed to extend the code for especial cases. In this post I explain what I added. 
 
-My intention was to add another front matter variable for the feature image source. This is a simple task if we assume that we will only get one source link per post.
+My idea was to add another front matter variable for the feature image source link. This is a simple task if we assume that we will only get one source link per post.
 
 The featured image in my [first post]({% post_url 2022-12-18-mood-board %}), a mood board, required multiple links (it is composed of multiple images). This seemed a great opportunity to practice some liquid language so here is what I did:
 
