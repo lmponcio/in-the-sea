@@ -4,15 +4,14 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Welcome to Alone in the Sea - a Blog in the making.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+My name is Martin Poncio, I am a developer based in Sydney, Australia. My background is engineering and I am experienced automating tasks using Python. 
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+This blog is created in the spirit of helping people who want to learn to code. I learned programming by myself and I know it can be hard at times. Hopefully the content of this site is useful for you in some way.
 
+In advance apologies: you might notice the site design is not fully finished - I've decided to start releasing posts as I move forward creating the blog. Hopefully documenting the process of building the site will be of use to someone else.
 
-[jekyll-organization]: https://github.com/jekyll
+You can [find me in Linkedin](https://bit.ly/mponcio-linkedin "
+Click to see my Profile").<br />
+Thanks for reading!
