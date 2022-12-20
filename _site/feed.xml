@@ -1,10 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-20T20:29:25+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Alone in the Sea</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Let’s start with a mood board</title><link href="http://localhost:4000/site-building/2022/10/19/mood-board.html" rel="alternate" type="text/html" title="Let’s start with a mood board" /><published>2022-10-19T00:00:00+11:00</published><updated>2022-10-19T00:00:00+11:00</updated><id>http://localhost:4000/site-building/2022/10/19/mood-board</id><content type="html" xml:base="http://localhost:4000/site-building/2022/10/19/mood-board.html"><![CDATA[<p>This is the first official post of the website. Since every step of the way for creating the site is an investment of time I would like to share that process. Maybe, hopefully, it will be useful for someone.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-21T00:32:40+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Alone in the Sea</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Add Post Featured Images with Liquid</title><link href="http://localhost:4000/site-building/2022/12/20/liquid-feature-image.html" rel="alternate" type="text/html" title="Add Post Featured Images with Liquid" /><published>2022-12-20T00:00:00+11:00</published><updated>2022-12-20T00:00:00+11:00</updated><id>http://localhost:4000/site-building/2022/12/20/liquid-feature-image</id><content type="html" xml:base="http://localhost:4000/site-building/2022/12/20/liquid-feature-image.html"><![CDATA[<p>I found a <a href="https://www.youtube.com/watch?v=6oKO-7gsM4s&amp;list=LL&amp;index=1">video online</a> explaining how to add featured images to Jekyll posts using liquid. I followed the instructions but I needed to extend the code for especial cases. In this post I explain what I added.</p>
 
-<p>The first step I am taking for defining the style of the site is creating a mood board - a visual brainstorming. I have used a Canva template and images from Unsplash (links provided).</p>
+<p>My intention was to add another front matter variable for the feature image source. This is a simple task if we assume that we will only get one source link per post.</p>
+
+<p>The featured image in my <a href="/site-building/2022/12/18/mood-board.html">first post</a>, a mood board, required multiple links (it is composed of multiple images). This seemed a great opportunity to practice some liquid language so here is what I did:</p>
+
+<p>In every post’s front matter I assign the source of the image to a variable <code>image_url</code>. If the image has only one source then the variable will be a string containing that information.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># 2022-12-18-my-post-title.markdown</span>
+<span class="nn">---</span>
+<span class="na">image_url</span><span class="pi">:</span> <span class="s">https://unsplash.com/photos/Adl90-aXYwA</span>
+<span class="nn">---</span></code></pre></figure>
+
+<p>If the image refers to multiple sources then the <code>image_url</code> variable will be an array containing all the sources:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># 2022-12-18-my-post-title.markdown</span>
+<span class="nn">---</span>
+<span class="na">image_url</span><span class="pi">:</span> 
+  <span class="pi">-</span> <span class="s">https://unsplash.com/photos/Adl90-aXYwA</span>
+  <span class="pi">-</span> <span class="s">https://unsplash.com/photos/4QVoKxlnsx0</span>
+  <span class="pi">-</span> <span class="s">https://unsplash.com/photos/asYCpxbYTWc</span>
+<span class="nn">---</span></code></pre></figure>
+
+<p>In liquid, we can <a href="https://stackoverflow.com/questions/38917552/check-if-variable-is-type-of-string-or-array-in-liquid">use the array filter “first”</a> to check if a variable is a string or a list of elements. This way, when <code>image_url</code> is an array I use a loop for displaying the links to the sources with numbers using <code>forloop.index</code>.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- post.html --&gt;</span>
+{%- if page.image -%}
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"{{- page.image | relative_url -}}"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"featured-image-post"</span><span class="nt">&gt;</span>
+    {%- if page.image_url.first -%}
+      {% comment %} multiple urls provided! {% endcomment %}
+      <span class="nt">&lt;p&gt;</span>
+        (Picture sources: 
+        {% for url in page.image_url %}   
+          {%- if forloop.last -%}
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{url}}"</span><span class="nt">&gt;</span>{{forloop.index}}<span class="nt">&lt;/a&gt;</span>
+          {%- else -%}
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{url}}"</span><span class="nt">&gt;</span>{{forloop.index}}<span class="nt">&lt;/a&gt;</span>,<span class="ni">&amp;nbsp;</span>
+          {%- endif -%}
+        {%- endfor -%}
+        )
+      <span class="nt">&lt;/p&gt;</span>
+      {%- else -%}
+        {% comment %} one url only {% endcomment %}
+        (Picture: {{page.image_url}})
+    {%- endif -%}
+{%- else -%}
+    {%- assign postImage="/assets/images/image-default.jpg" -%}    
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"{{- postImage | relative_url -}}"</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"featured-image-post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>(Picture: https://unsplash.com/photos/cckf4TsHAuw)<span class="nt">&lt;/p&gt;</span>
+{%- endif -%}    </code></pre></figure>
+
+<p>This solution works for me for now. I am learning jekyll and liquid as I move forward, so there might be a better approach that I am not aware of - I will post a better solution in the future if I find one.</p>]]></content><author><name></name></author><category term="site-building" /><category term="liquid" /><summary type="html"><![CDATA[I found a video online explaining how to add featured images to Jekyll posts using liquid. I followed the instructions but I needed to extend the code for especial cases. In this post I explain what I added.]]></summary></entry><entry><title type="html">Let’s start with a mood board</title><link href="http://localhost:4000/site-building/2022/12/18/mood-board.html" rel="alternate" type="text/html" title="Let’s start with a mood board" /><published>2022-12-18T00:00:00+11:00</published><updated>2022-12-18T00:00:00+11:00</updated><id>http://localhost:4000/site-building/2022/12/18/mood-board</id><content type="html" xml:base="http://localhost:4000/site-building/2022/12/18/mood-board.html"><![CDATA[<p>This is the first official post of the website. Since every step of the way for creating the site is an investment of time I would like to share that process. Maybe, hopefully, it will be useful for someone.</p>
+
+<p>The first step I am taking for defining the style of the site is creating a mood board - a visual brainstorming. I have used a <a href="https://www.canva.com/templates/EAFNpzGyfnE-cream-modern-aesthetic-feminine-tender-mood-board-photo-collage/">Canva template</a> and images from Unsplash (links below mood board image).</p>
 
 <p>For the color palette I find it useful to grab a picture and extract colors from there. I have used a feature from Krita that generates a palette  when one color is given as an input. I will not use all of them, but it is a start.</p>
 
-<p><img src="/assets/images/2022-12-18-palette.jpg" alt="" /></p>]]></content><author><name></name></author><category term="site-building" /><summary type="html"><![CDATA[This is the first official post of the website. Since every step of the way for creating the site is an investment of time I would like to share that process. Maybe, hopefully, it will be useful for someone.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/2022-12-18-mood-board.jpg" /><media:content medium="image" url="http://localhost:4000/assets/images/2022-12-18-mood-board.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Template Post</title><link href="http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Template Post" /><published>2022-10-18T19:32:44+11:00</published><updated>2022-10-18T19:32:44+11:00</updated><id>http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll.html"><![CDATA[<p>This post is automatically written by the website generator</p>
+<p><img src="/assets/images/2022-12-18-palette.jpg" alt="" /></p>]]></content><author><name></name></author><category term="site-building" /><category term="design" /><summary type="html"><![CDATA[This is the first official post of the website. Since every step of the way for creating the site is an investment of time I would like to share that process. Maybe, hopefully, it will be useful for someone.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/2022-12-18-mood-board.jpg" /><media:content medium="image" url="http://localhost:4000/assets/images/2022-12-18-mood-board.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Template Post</title><link href="http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Template Post" /><published>2022-10-18T19:32:44+11:00</published><updated>2022-10-18T19:32:44+11:00</updated><id>http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2022/10/18/welcome-to-jekyll.html"><![CDATA[<p>This post is automatically written by the website generator</p>
 
 <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
 
