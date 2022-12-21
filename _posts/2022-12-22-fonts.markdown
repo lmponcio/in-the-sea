@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "Choosing Fonts"
+categories: site-building
+tags: design jekyll
+image: assets/images/2022-12-22-font-selection.jpg
+---
+
+I found a [post](https://www.apaddedcell.com/web-fonts/) explaining how "absolutely web-safe fonts do not exist". Even that's the case, I still want to choose a standard font. This might sound silly, but it is also a matter of energy efficiency - I might write a post about [green digital skills](https://www.greenskills.inco-group.co/) someday.
+
+So I picked a couple of the standard fonts and compared them in a table (see image above). I think I already got a winner. I will apply this change to the site soon together with a few other changes I want to apply to the css files.
+

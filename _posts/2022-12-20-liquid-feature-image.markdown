@@ -2,7 +2,7 @@
 layout: post
 title:  "Add Post Featured Images with Liquid"
 categories: site-building
-tags: liquid
+tags: liquid jekyll
 # image_url: fds
 ---
 
@@ -12,7 +12,7 @@ My idea was to add another front matter variable for the feature image source li
 
 The featured image in my [first post]({% post_url 2022-12-18-mood-board %}), a mood board, required multiple links (it is composed of multiple images). This seemed a great opportunity to practice some liquid language so here is what I did:
 
-In every post's front matter I assign the source of the image to a variable <code>image_url</code>. If the image has only one source then the variable will be a string containing that information.
+In every post's front matter I assign the source of the image to a variable `image_url`. If the image has only one source then the variable will be a string containing that information.
 
 {% highlight YAML %}
 # 2022-12-18-my-post-title.markdown
@@ -21,7 +21,7 @@ image_url: https://unsplash.com/photos/Adl90-aXYwA
 ---
 {% endhighlight %}
 
-If the image refers to multiple sources then the <code>image_url</code> variable will be an array containing all the sources:
+If the image refers to multiple sources then the `image_url` variable will be an array containing all the sources:
 
 {% highlight YAML %}
 # 2022-12-18-my-post-title.markdown
@@ -33,7 +33,7 @@ image_url:
 ---
 {% endhighlight %}
 
-In liquid, we can [use the array filter "first"](https://stackoverflow.com/questions/38917552/check-if-variable-is-type-of-string-or-array-in-liquid) to check if a variable is a string or a list of elements. This way, when <code>image_url</code> is an array I use a loop for displaying the links to the sources with numbers using <code>forloop.index</code>.
+In liquid, we can [use the array filter "first"](https://stackoverflow.com/questions/38917552/check-if-variable-is-type-of-string-or-array-in-liquid) to check if a variable is a string or a list of elements. This way, when `image_url` is an array I use a loop for displaying the links to the sources with numbers using `forloop.index`.
 
 {% highlight html %}
 {% raw %}

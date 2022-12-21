@@ -53,14 +53,14 @@
 
 <p>The featured image in my <a href="/site-building/2022/12/18/mood-board.html">first post</a>, a mood board, required multiple links (it is composed of multiple images). This seemed a great opportunity to practice some liquid language so here is what I did:</p>
 
-<p>In every post’s front matter I assign the source of the image to a variable <code>image_url</code>. If the image has only one source then the variable will be a string containing that information.</p>
+<p>In every post’s front matter I assign the source of the image to a variable <code class="highlighter-rouge">image_url</code>. If the image has only one source then the variable will be a string containing that information.</p>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># 2022-12-18-my-post-title.markdown</span>
 <span class="nn">---</span>
 <span class="na">image_url</span><span class="pi">:</span> <span class="s">https://unsplash.com/photos/Adl90-aXYwA</span>
 <span class="nn">---</span></code></pre></figure>
 
-<p>If the image refers to multiple sources then the <code>image_url</code> variable will be an array containing all the sources:</p>
+<p>If the image refers to multiple sources then the <code class="highlighter-rouge">image_url</code> variable will be an array containing all the sources:</p>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># 2022-12-18-my-post-title.markdown</span>
 <span class="nn">---</span>
@@ -70,7 +70,7 @@
   <span class="pi">-</span> <span class="s">https://unsplash.com/photos/asYCpxbYTWc</span>
 <span class="nn">---</span></code></pre></figure>
 
-<p>In liquid, we can <a href="https://stackoverflow.com/questions/38917552/check-if-variable-is-type-of-string-or-array-in-liquid">use the array filter “first”</a> to check if a variable is a string or a list of elements. This way, when <code>image_url</code> is an array I use a loop for displaying the links to the sources with numbers using <code>forloop.index</code>.</p>
+<p>In liquid, we can <a href="https://stackoverflow.com/questions/38917552/check-if-variable-is-type-of-string-or-array-in-liquid">use the array filter “first”</a> to check if a variable is a string or a list of elements. This way, when <code class="highlighter-rouge">image_url</code> is an array I use a loop for displaying the links to the sources with numbers using <code class="highlighter-rouge">forloop.index</code>.</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- post.html --&gt;</span>
 {%- if page.image -%}

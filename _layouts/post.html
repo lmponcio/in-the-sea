@@ -6,22 +6,24 @@ layout: default
   <header class="post-header">
     {%- if page.image -%}
         <img src="{{- page.image | relative_url -}}" alt="" class="featured-image-post">
-        {%- if page.image_url.first -%}
-          {% comment %} multiple urls provided! {% endcomment %}
-          <p>
-            (Picture sources: 
-            {% for url in page.image_url %}   
-              {%- if forloop.last -%}
-                <a href="{{url}}">{{forloop.index}}</a>
-              {%- else -%}
-                <a href="{{url}}">{{forloop.index}}</a>,&nbsp;
-              {%- endif -%}
-            {%- endfor -%}
-            )
-          </p>
+        {%- if page.image_url -%}
+          {%- if page.image_url.first -%}
+            {% comment %} multiple urls provided! {% endcomment %}
+            <p>
+              (Picture sources: 
+              {% for url in page.image_url %}   
+                {%- if forloop.last -%}
+                  <a href="{{url}}">{{forloop.index}}</a>
+                {%- else -%}
+                  <a href="{{url}}">{{forloop.index}}</a>,&nbsp;
+                {%- endif -%}
+              {%- endfor -%}
+              )
+            </p>
           {%- else -%}
-            {% comment %} one url only {% endcomment %}
-            (Picture: {{page.image_url}})
+              {% comment %} one url only {% endcomment %}
+              (Picture:: {{page.image_url}})
+          {%- endif -%}
         {%- endif -%}
     {%- else -%}
         {%- assign postImage="/assets/images/image-default.jpg" -%}    
