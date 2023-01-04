@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Choosing Fonts"
-categories: site-building
+categories: updates
 tags: design jekyll
 image: assets/images/2022-12-22-font-selection.jpg
 ---
