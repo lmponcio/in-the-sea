@@ -1,0 +1,29 @@
+---
+layout: page
+permalink: /coder-talks/
+title: CoderTalks
+---
+<p>Reflections, brainstormings and stories about code.</p>
+{%comment%}
+To add in the future
+  The articles in this section are intended to help you in your learning path from an angle different than a tutorial. Here you will find reflections related to how to build a portfolio, finding the correct next thing to learn, what role networking plays in our growth, and related topics
+  The information provided in these talks is just my opinion. I'm just a human telling my experiences in the hope that someone else can find value in them - if I'm wrong in anything, apologies
+{%endcomment%}
+<div>
+<ul class="post-list">
+  {%- for post in site.categories["coder-talks"] -%}
+  <li>
+    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+    <span class="post-meta">{{ post.date | date: date_format }}</span>
+    <h3>
+      <a class="post-link" href="{{ post.url | relative_url }}">
+        {{ post.title | escape }}
+      </a>
+    </h3>
+    {%- if site.show_excerpts -%}
+      {{ post.excerpt }}
+    {%- endif -%}
+  </li>
+  {%- endfor -%}
+</ul>
+</div>

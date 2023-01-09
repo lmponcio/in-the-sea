@@ -1,0 +1,27 @@
+---
+layout: page
+permalink: /updates/
+title: Website Updates
+exclude: true # for it not to show in nav
+---
+<p>The articles in this section are a journal of the changes applied to the website, including brainstormings about design ideas. From my angle I find documenting the work a healthy practice. I also think that someone else could benefit from taking a look at my process. </p>
+<p>The articles in this section are not a tutorial. Posts here tend to be brief and to the point.
+
+<div>
+<ul class="post-list">
+  {%- for post in site.categories["updates"] -%}
+  <li>
+    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+    <span class="post-meta">{{ post.date | date: date_format }}</span>
+    <h3>
+      <a class="post-link" href="{{ post.url | relative_url }}">
+        {{ post.title | escape }}
+      </a>
+    </h3>
+    {%- if site.show_excerpts -%}
+      {{ post.excerpt }}
+    {%- endif -%}
+  </li>
+  {%- endfor -%}
+</ul>
+</div>
